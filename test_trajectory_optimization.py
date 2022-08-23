@@ -1,14 +1,16 @@
 import numpy
 import os
 import inspect
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-os.sys.path.insert(0, parentdir)
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+os.sys.path.insert(0, parent_dir)
+#world_dir = os.path.abspath("../worlds/models")
+world_dir = os.path.abspath("worlds")
 
 import pybullet
 import pybullet_data as pd
 from pybullet_utils import bullet_client
-
+import world_parser as gazebo_world_parser
 import time
 
 from mpc_controller import a1_sim as robot_sim
@@ -20,8 +22,6 @@ from trot_controller import TrotController
 max_time = 100
 #time_step = 0.001
 simulation_time_step = 0.001
-ini_pos = [0, 0, 0.24]  # initial position
-end_pos = [3, 1, 0.24]  # end position
 
 ''' recording video requires ffmpeg in the path'''
 record_video = False
@@ -46,7 +46,7 @@ p.setPhysicsEngineParameter(enableConeFriction=0)
 p.setAdditionalSearchPath(pd.getDataPath())
 p.loadURDF("plane.urdf")
 p.configureDebugVisualizer(p.COV_ENABLE_RENDERING,1)
-
+#gazebo_world_parser.parseWorld( p, filepath = "worlds/table.world", model_path=world_dir )
 robot_uid = p.loadURDF(robot_sim.URDF_NAME, robot_sim.START_POS)
 robot = robot_sim.SimpleRobot(p, robot_uid, simulation_time_step=simulation_time_step)
 

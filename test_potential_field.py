@@ -57,7 +57,7 @@ robot = robot_sim.SimpleRobot(p, robot_uid, simulation_time_step=simulation_time
 ''' set the planner '''
 time_step = 0.001
 k_att     = numpy.array([[1, 0, 0], [0, 1, 0], [0, 0, 0.25]])
-k_rep     = 0.25
+k_rep     = 1
 vel_max   = 0.5
 planner   = PotentialFieldPlanner(end_pos, time_step, k_att, k_rep, vel_max)
 

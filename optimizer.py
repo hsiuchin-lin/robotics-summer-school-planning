@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 class Optimizer():
 
-    def __init__(self, integrator="Euler", N=100, n_variables=4, ini_pos=[0, 0, 0.24, 0], end_pos= [3, 0, 0.24, 0], ini_vel=[0, 0, 0, 0], end_vel=[0, 0, 0, 0]):
+    def __init__(self, integrator="Euler", N=100, n_variables=4, ini_pos=[0, 0, 0.27, 0], end_pos= [3, 0, 0.27, 0], ini_vel=[0, 0, 0, 0], end_vel=[0, 0, 0, 0]):
         self.integrator = integrator
         self.N = N
         self.n_variables = n_variables

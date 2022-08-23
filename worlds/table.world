@@ -69,7 +69,7 @@
       
       
       <model name="table">
-        <pose>3 0 -0.66 0 -0 1.57</pose>
+        <pose>2 0 -0.66 0 -0 1.57</pose>
         <scale>1 1 1</scale>
         <!--link name="link">
           <pose>0 0 0 0 -0 0</pose>

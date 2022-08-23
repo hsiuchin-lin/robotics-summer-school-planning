@@ -5,7 +5,6 @@ import numpy
 
 class PotentialFieldPlanner():
 
-
     def __init__(self, pos_end, dt, k_att, k_rep, vel_max):
     
         self.pos_end = numpy.array(pos_end)
@@ -35,6 +34,8 @@ class PotentialFieldPlanner():
     def get_attractive_force ( self, pos_fbk ):
       	
       	vel_des = numpy.matmul( self.k_att, ( self.pos_end - pos_fbk ) )
+      	
+      	# normalize it if the norm is too large
       	d = numpy.linalg.norm(vel_des)
       	if d > self.vel_max:
             vel_des = vel_des / d * self.vel_max
@@ -46,18 +47,17 @@ class PotentialFieldPlanner():
         vel_att = self.get_attractive_force ( pos_fbk ) 
         vel_rep = self.get_repulsive_force ( pos_fbk ) 
         vel_des = vel_att + vel_rep 
-        	    
+        	   
+        # normalize it if the norm is too large
         d = numpy.linalg.norm(vel_des) 
         if d > self.vel_max:
             vel_des = vel_des / d * self.vel_max
         
         pos_des = pos_fbk + vel_des * self.dt 
         
-        print(" vel_att=", vel_att, ",vel_rep", vel_rep)
+       #print(" vel_att=", vel_att, ",vel_rep", vel_rep)
         
         return pos_des, vel_des
-    	
-    	
     	
     def get_repulsive_force ( self, pos_fbk ):
        
@@ -67,9 +67,11 @@ class PotentialFieldPlanner():
         if d > self.dist_min: # Far enough away, ignore the obstacle
 	        return numpy.array ([0,0,0])
         else:
-            dd_dq 	= 2 * ( self.pos_obs - pos_fbk ) #eculidean_derivative ( pos_fbk, self.pos_obs )          
+            dd_dq 	= 2 * ( self.pos_obs - pos_fbk )           
             vel_des = -self.k_rep / (d*d) * (1/d - 1/self.dist_min) * dd_dq            
             vel_des[2] = 0.0     
+            
+            # normalize it if the norm is too large
             d = numpy.linalg.norm(vel_des) 
             if d > self.vel_max:
                 vel_des = vel_des / d * self.vel_max
