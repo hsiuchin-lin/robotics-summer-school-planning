@@ -50,10 +50,10 @@ orn = p.getQuaternionFromEuler([0, -math.pi, 0])
 
 end_pos = [0.3, -0.7, 1.0]
 time_step = 0.001
-k_att     = 50*numpy.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+k_att     = 200*numpy.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
 k_rep     = 50
-vel_max   = 50
-planner   = PotentialFieldPlanner(end_pos, time_step, k_att, k_rep, vel_max)
+vel_max   = 200
+#planner   = PotentialFieldPlanner(end_pos, time_step, k_att, k_rep, vel_max)
 
 planner = PotentialFieldPlanner(end_pos, time_step, k_att, k_rep, vel_max)
 
